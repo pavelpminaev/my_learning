@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "my-learning"
+version = "0.1.0"
+description = ""
+authors = ["pavelpminaev <pavelpminaev@gmail.com>"]
+readme = "README.md"
+packages = [{include = "my_learning"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+wemake-python-styleguide = "^0.17.0"
+prompt = "^0.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
