@@ -1,19 +1,57 @@
-# create new poetry directory
-$ poetry new project_name
+Create new poetry directory
+```bash
+poetry new project_name
+```
+Install dependens of project
+```bash
+poetry install
+```
+Add new dependens (packeges) in project
+```bash
+poetry add --group dev pytest prompt
+```
+Add linter
+```bash
+poetry add --group dev wemake-python-styleguide
+```
+Make git-repo
+```bash
+git init -b main
+```
+```bash
+git add . && git commit -m 'innitial commit'
+```
+Create and choose 'Push an existing local repo..'
+```bash
+gh repo create
+```
+> Зарегистрируйтесь на CodeClimate (при регистрации выбирайте ветку Quality)
+> Подключите к нему свой репозиторий
+> Разместите в ридми бейджик Maintainability своего проекта (см. https://docs.codeclimate.com/docs/overview#badges)
 
-# install dependens of project
-$ poetry install
+- Create Makefile
 
-# add new dependens (packeges) in project
-$ poetry add --group dev pytest prompt poetry wemake-python-styleguide
+Добавьте в Makefile команду build, которая выполнит 
+```bash
+poetry build
+```
+Добавьте в Makefile команду publish, которая выполнит
+```bash
+poetry publish --dry-run
+````
+Добавьте в Makefile команду package-install, которая выполнит 
+```bash
+python3 -m pip install --user dist/*.whl
+```
 
-# make git-repo
-$ git init -b main
-$ git add . && git commit -m 'innitial commit'
-$ gh repo create  # choose > Push an existing local repo..
+Добавьте в .toml
+>[tool.poetry.scripts]\
+brain-games = "package_name.scripts.module:main"'
 
-Зарегистрируйтесь на CodeClimate (при регистрации выбирайте ветку Quality)
-Подключите к нему свой репозиторий
-Разместите в ридми бейджик Maintainability своего проекта (см. https://docs.codeclimate.com/docs/overview#badges)
+example for markdown file:
+``` python3
+# It`s python code
 
-
+def function():
+    return result
+```
