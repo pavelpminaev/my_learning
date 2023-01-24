@@ -1,6 +1,5 @@
-def launch_rocket   ():
-
-xy = "x"
+def launch_rocket   (book):
+    return str(book)
 
     """Launch
 the
@@ -27,3 +26,7 @@ def main():
     print_factorial(5)
     if factorial(10):
       launch_rocket()
+
+
+
+
