@@ -14,6 +14,55 @@ Add linter
 ```bash
 poetry add --group dev wemake-python-styleguide
 ```
+```bash
+poetry add --group dev black
+```
+
+
+```bash
+poetry add --group dev mypy # static type checker for Python.
+```
+
+ - isort
+
+ - pre-commit
+
+
+add setup.cfg - file configuration
+``````
+[coverage:run]
+branch = True
+
+[flake8]
+accept-encodings = utf-8
+max-complexity = 6
+statistics = False
+max-line-length = 80
+doctests = True
+enable-extensions = G
+isort-show-traceback = True
+
+# clean default ignore list
+ignore =
+
+per-file-ignores =
+  # it is possibble to have prints in scripts
+  packege/subpackege/*.py: WPS421
+
+[tool:pytest]
+norecursedirs = __pycache__
+addopts = --strict-markers
+
+[isort]
+# See https://github.com/timothycrosley/isort#multi-line-output-modes
+multi_line_output = 3
+include_trailing_comma = true
+default_section = FIRSTPARTY
+# Should be: 80 - 1
+line_length = 79
+``````
+
+
 Make git-repo
 ```bash
 git init -b main
@@ -43,6 +92,12 @@ poetry publish --dry-run
 ```bash
 python3 -m pip install --user dist/*.whl
 ```
+Добавьте в Makefile команду 'clean' for experiments
+```
+clean:
+	rm -rf .pytest_cache .coverage .pytest_cache coverage.xml
+```
+
 
 Добавьте в .toml
 >[tool.poetry.scripts]\
