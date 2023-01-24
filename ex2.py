@@ -7,28 +7,22 @@ def launch_rocket(book):
 
 
 def factorial(x):
-    """
-
-    Return x factorial.
+    """Return x factorial.
 
     This uses math.factorial.
-
     """
     import math
-    import re
-    import os
 
     return math.factorial(x)
 
 
 def print_factorial(x):
-    """Print x factorial"""
+    """Print x factorial."""
     print(factorial(x))
 
 
 def main():
-    """Main
-    function"""
+    """Main function."""
     print_factorial(5)
     if factorial(10):
         launch_rocket()
