@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
         # we want to test our package on several versions of Python
