@@ -4,13 +4,11 @@ on: push
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
+    runs-on: macos-latest
     strategy:
       matrix:
         # we want to test our package on several versions of Python
         python-version: [3.8, 3.9]
-        # several OS
-        os: [ ubuntu-latest, macos-latest ]
 
       # run – произвольная bash-команда
       # ls -la выведет содержимое текущего репозитория
