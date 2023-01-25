@@ -10,9 +10,8 @@ install:
 #package-install:
 #python3 -m pip install --user dist/*.whl
 
-.PHONY: lint
-	lint:
-		poetry run flake8 learning_files/scripts
+lint:
+	poetry run flake8 learning_files/scripts
 
 #reinstall:
 #python3 -m pip install --user --force-reinstall dist/*.whl
