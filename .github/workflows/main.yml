@@ -6,11 +6,12 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
         # we want to test our package on several versions of Python
         python-version: [3.8, 3.9]
+        os: [ ubuntu-latest, macos-latest ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
