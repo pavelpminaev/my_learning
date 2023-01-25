@@ -1,4 +1,4 @@
-
+"""It's example doctest using"""
 
 def reverse(string):
     """Reverse string.
