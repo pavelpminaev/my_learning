@@ -1,23 +1,22 @@
-install:
+#install:
 	poetry install
 
-build:
+#build:
 	poetry build
 
-publish:
+#publish:
 	poetry publish --dry-run
 
-package-install:
+#package-install:
 	python3 -m pip install --user dist/*.whl
 
-.PHONY: lint
-lint:
+#.PHONY: lint
+#lint:
 	poetry run flake8 learning_files/scripts
 
-reinstall:
+#reinstall:
 	python3 -m pip install --user --force-reinstall dist/*.whl
 
-
-
-all:
+#all:
 	install lint build publish
+
