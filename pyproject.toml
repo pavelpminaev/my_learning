@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["pavelpminaev <pavelpminaev@gmail.com>"]
 readme = "README.md"
-packages = [{include = "my_learning"}]
+packages = [{include = "learning_files"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
