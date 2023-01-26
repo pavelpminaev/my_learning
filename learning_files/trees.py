@@ -114,3 +114,4 @@ print('Our tree without first level =>', remove_first_level(tree3))
 
 print(Fore.RED + '-'*100, end='\n\n')
 print(Fore.RED + '-'*100, end='\n\n')
+print(Fore.RED + '-'*100, end='\n\n')
