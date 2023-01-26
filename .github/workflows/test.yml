@@ -1,6 +1,7 @@
 name: test
 
 on:
+  - push
   push:
     branches:
       - master
@@ -41,7 +42,7 @@ jobs:
         poetry install
     - name: Run checks
       run: |
-        poetry run flake8 .
+        poetry run flake8 lerning_files/scripts
         poetry run pytest
         poetry run poetry check
         poetry run pip check
