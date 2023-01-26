@@ -113,4 +113,4 @@ print('Demonstrate working of chain(tree1, tree2) function. Our tree =>', tree3)
 print('Our tree without first level =>', remove_first_level(tree3))
 
 print(Fore.RED + '-'*100, end='\n\n')
-
+print(Fore.RED + '-'*100, end='\n\n')
