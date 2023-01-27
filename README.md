@@ -10,5 +10,5 @@
 
 [![Known Vulnerabilities](https://snyk.io/test/github/pavelpminaev/my_learning/badge.svg)](https://snyk.io/test/github/pavelpminaev/my_learning)
 
-
+[![Known Vulnerabilities](https://snyk.io/test/github/pavelpminaev/ci-app/badge.svg)](https://snyk.io/test/github/pavelpminaev/ci-app)
 
