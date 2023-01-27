@@ -8,7 +8,7 @@
 
 [![test](https://github.com/pavelpminaev/my_learning/actions/workflows/test.yml/badge.svg)](https://github.com/pavelpminaev/my_learning/actions/workflows/test.yml)
 
-[![Known Vulnerabilities](https://snyk.io/test/github/pavelpminaev/my_learning/badge.svg)](https://snyk.io/test/github/pavelpminaev/my_learning)
+[![Snyk](https://snyk.io/test/github/pavelpminaev/my_learning/badge.svg)](https://snyk.io/test/github/pavelpminaev/my_learning)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/pavelpminaev/ci-app/badge.svg)](https://snyk.io/test/github/pavelpminaev/ci-app)
 
