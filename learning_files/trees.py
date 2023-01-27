@@ -115,3 +115,23 @@ print('Our tree without first level =>', remove_first_level(tree3))
 print(Fore.RED + '-'*100, end='\n\n')
 print(Fore.RED + '-'*100, end='\n\n')
 print(Fore.RED + '-'*100, end='\n\n')
+
+massiv = [3, 4, 5, 4, 6, 1, 1, 8, 1, 2, 3]
+
+def dublicate(massiv):
+    resalt = []
+    i = 0
+    my_set = set(massiv)
+    while i < len(massiv):
+        if massiv[i] in my_set:
+            my_set.remove(massiv[i])
+            i += 1
+        else:
+            resalt.append(massiv[i])
+            i += 1
+    print(list(set(resalt)))
+
+
+dublicate(massiv)
+
+
