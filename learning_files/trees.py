@@ -112,9 +112,7 @@ tree3 = list(chain(tree1, tree2))
 print('Demonstrate working of chain(tree1, tree2) function. Our tree =>', tree3)
 print('Our tree without first level =>', remove_first_level(tree3))
 
-print(Fore.RED + '-'*100, end='\n\n')
-print(Fore.RED + '-'*100, end='\n\n')
-print(Fore.RED + '-'*100, end='\n\n')
+
 
 massiv = [3, 4, 5, 4, 6, 1, 1, 8, 1, 2, 3]
 
@@ -131,7 +129,190 @@ def dublicate(massiv):
             i += 1
     print(list(set(resalt)))
 
-
 dublicate(massiv)
 
 
+import hexlet.fs as fs
+
+# mkdir вторым параметром принимает список детей,
+# которые могут быть либо директориями, созданными mkdir,
+# либо файлами, созданными mkfile
+tree = fs.mkdir('etc', [
+    fs.mkfile('bashrc'),
+    fs.mkdir('consul', [
+        fs.mkfile('config.json'),
+
+    ]),
+])
+
+print(tree)
+
+tree2 = \
+    {
+    'name': 'etc',
+    'children': [
+    {
+    'name': 'bashrc',
+    'meta': {},
+    'type': 'file'
+    },
+    {
+    'name': 'consul',
+    'children':
+    [
+    {
+    'name': 'config.json',
+    'meta': {},
+    'type': 'file'
+    }
+    ],
+    'meta': {},
+    'type': 'directory'
+    }
+    ],
+    'meta': {},
+    'type': 'directory'
+    }
+
+print(tree2)
+
+
+tree = fs.mkdir(
+    'my documents',
+    [
+        fs.mkfile('avatar.jpg', {'size': 100}),
+        fs.mkfile('photo.jpg', {'size': 150}),
+    ],
+    {'hide': False}
+)
+"""compress_images(tree)"""
+# {
+#     'name': 'my documents',
+#     'type': 'directory',
+#     'children': [
+#         {'name': 'avatar.jpg', 'meta': {'size': 50}, 'type': 'file'},
+#         {'name': 'photo.jpg', 'meta': {'size': 75}, 'type': 'file'},
+#     ],
+#     'meta': {'hide': False},
+# }
+
+print(Fore.RED + '-'*100, end='\n\n')
+
+import copy
+
+tree = fs.mkdir(
+    'my documents',
+    [
+        fs.mkfile('avatar.jpg', {'size': 100}),
+        fs.mkfile('photo.jpg', {'size': 150}),
+    ],
+    {'hide': False}
+)
+
+def compress_images(tree):
+    children = fs.get_children(tree)
+
+    def reduce_image_size(node):
+        name = fs.get_name(node)
+        """if not fs.is_file(node) or not name.endswith('.jpg'):
+            return node"""
+        meta = fs.get_meta(node)
+        new_meta = copy.deepcopy(meta)
+        new_meta['size'] //= 2
+        return fs.mkfile(name, new_meta)
+
+    new_children = map(reduce_image_size, children)
+    new_meta = copy.deepcopy(fs.get_meta(tree))
+    return fs.mkdir(fs.get_name(tree), list(new_children), new_meta)
+
+print(compress_images(tree))
+
+
+print(Fore.RED + '-'*100, end='\n\n')
+
+tree = fs.mkdir('/', [
+    fs.mkdir('etc', [
+        fs.mkfile('bashrc'),
+        fs.mkfile('consul.cfg'),
+    ]),
+    fs.mkfile('hexletrc'),
+    fs.mkdir('bin', [
+        fs.mkfile('ls'),
+        fs.mkfile('cat'),
+    ]),
+])
+
+
+def dfs(node):
+    # Распечатываем имя узла
+    print(fs.get_name(node))
+    # Если это файл, то возвращаем управление
+    if fs.is_file(node):
+        return
+
+    # Получаем детей
+    children = fs.get_children(node)
+
+    # Применяем функцию dfs ко всем дочерним элементам
+    # Множество рекурсивных вызовов в рамках одного вызова функции
+    # называется древовидной рекурсией
+    list(map(dfs, children))
+
+
+dfs(tree)
+
+print(Fore.RED + '-'*100, end='\n\n')
+
+tree = fs.mkdir('/', [
+    fs.mkdir('etc', [
+        fs.mkfile('bashrc'),
+        fs.mkfile('consul.cfg'),
+    ]),
+    fs.mkfile('hexletrc'),
+    fs.mkdir('bin', [
+        fs.mkfile('ls'),
+        fs.mkfile('cat'),
+    ]),
+])
+
+owner = 'Pavel'
+
+def change_owner(node, owner):
+    name = fs.get_name(node)
+    new_meta = fs.get_meta(node)
+    new_meta['owner'] = owner
+    if fs.is_file(node):
+        return fs.mkfile(name, new_meta)
+    children = fs.get_children(node)
+    new_children = list(map(lambda child: change_owner(child, owner), children))
+    new_tree = fs.mkdir(name, new_children, new_meta)
+    return new_tree
+
+print(change_owner(tree, owner))
+
+def dfs(node):
+    # Распечатываем имя узла
+    print(fs.get_name(node))
+    # Если это файл, то возвращаем управление
+    if fs.is_file(node):
+        return
+
+    # Получаем детей
+    children = fs.get_children(node)
+
+    # Применяем функцию dfs ко всем дочерним элементам
+    # Множество рекурсивных вызовов в рамках одного вызова функции
+    # называется древовидной рекурсией
+    list(map(dfs, children))
+
+dfs(tree)
+
+
+
+
+def downcase_file_names(node):
+    name = fs.get_name(node)
+    new_meta = copy.deepcopy(fs.get_meta(node))
+    if fs.is_file(node):
+        return fs.mkfile(name.lower(), new_meta)
+    children
