@@ -105,6 +105,7 @@ print ("Is test_list list? : " + str(isinstance(test_list, list)), end='\n\n')  
 print(Fore.GREEN + 'Removing levels in trees')
 tree1 = [[5], 1, [3, 4]]
 tree2 = [1, 2, [3, 5], [[4, 3], 2]]
+
 def remove_first_level(tree_list):
     children = filter(lambda item: isinstance(item, list), tree_list)
     return list(chain(*children))
@@ -148,7 +149,7 @@ tree = fs.mkdir('etc', [
 print(tree)
 
 tree2 = \
-    {
+{
     'name': 'etc',
     'children': [
     {
@@ -177,14 +178,10 @@ tree2 = \
 print(tree2)
 
 
-tree = fs.mkdir(
-    'my documents',
-    [
+tree = fs.mkdir('my documents', [
         fs.mkfile('avatar.jpg', {'size': 100}),
-        fs.mkfile('photo.jpg', {'size': 150}),
-    ],
-    {'hide': False}
-)
+        fs.mkfile('photo.jpg', {'size': 150}), ], {'hide': False} )
+
 """compress_images(tree)"""
 # {
 #     'name': 'my documents',
@@ -200,9 +197,7 @@ print(Fore.RED + '-'*100, end='\n\n')
 
 import copy
 
-tree = fs.mkdir(
-    'my documents',
-    [
+tree = fs.mkdir('my documents', [
         fs.mkfile('avatar.jpg', {'size': 100}),
         fs.mkfile('photo.jpg', {'size': 150}),
     ],
@@ -279,7 +274,7 @@ owner = 'Pavel'
 
 def change_owner(node, owner):
     name = fs.get_name(node)
-    new_meta = fs.get_meta(node)
+    new_meta = copy.deepcopy(fs.get_meta(node))
     new_meta['owner'] = owner
     if fs.is_file(node):
         return fs.mkfile(name, new_meta)
@@ -288,26 +283,31 @@ def change_owner(node, owner):
     new_tree = fs.mkdir(name, new_children, new_meta)
     return new_tree
 
-print(change_owner(tree, owner))
+print('change_owner =', change_owner(tree, owner))
 
 def dfs(node):
-    # Распечатываем имя узла
-    print(fs.get_name(node))
-    # Если это файл, то возвращаем управление
-    if fs.is_file(node):
-        return
+   print(fs.get_name(node))
+   if fs.is_file(node):
+       return
+   children = fs.get_children(node)
+   list(map(dfs, children))
 
-    # Получаем детей
-    children = fs.get_children(node)
 
-    # Применяем функцию dfs ко всем дочерним элементам
-    # Множество рекурсивных вызовов в рамках одного вызова функции
-    # называется древовидной рекурсией
-    list(map(dfs, children))
 
 dfs(tree)
 
 
+
+tree2 = fs.mkdir('/', [
+    fs.mkdir('eTc', [
+        fs.mkdir('NgiNx', [], {'size': 4000}),
+        fs.mkdir(
+            'CONSUL',
+            [fs.mkfile('config.JSON', {'uid': 0})],
+        ),
+    ]),
+    fs.mkfile('HOSTS'),
+])
 
 
 def downcase_file_names(node):
@@ -315,4 +315,50 @@ def downcase_file_names(node):
     new_meta = copy.deepcopy(fs.get_meta(node))
     if fs.is_file(node):
         return fs.mkfile(name.lower(), new_meta)
-    children
+    children = fs.get_children(node)
+    new_children = map(downcase_file_names, children)
+    return fs.mkdir(name, new_children, new_meta)
+
+print(Fore.RED + '-'*100, '\n', Fore.RED + 'AGGREGATION', end='\n\n')
+
+def get_nodes_count(node):
+    if fs.is_file(node):
+        return 1
+
+    children = fs.get_children(node)
+
+    chil_count = list(map(get_nodes_count, children))
+    return 1 + sum(chil_count)
+
+print('get_nodes_count =', get_nodes_count(tree))
+
+
+tree = fs.mkdir('/', [
+    fs.mkdir('etc', [
+        fs.mkdir('apache'),
+        fs.mkdir('nginx', [
+            fs.mkfile('.nginx.conf', {'size': 800}),
+        ]),
+        fs.mkdir('.consul', [
+            fs.mkfile('.config.json', {'size': 1200}),
+            fs.mkfile('data', {'size': 8200}),
+            fs.mkfile('raft', {'size': 80}),
+        ]),
+    ]),
+    fs.mkfile('.hosts', {'size': 3500}),
+    fs.mkfile('resolve', {'size': 1000}),
+])
+
+
+def get_hidden_files_count(node):
+    name = fs.get_name(node)
+    if fs.is_file(node):
+        return name.startswith('.')
+    children = fs.get_children(node)
+    hidden_count = list(map(get_hidden_files_count, children))
+    return sum(hidden_count)
+print('get_hidden_files_count =', get_hidden_files_count(tree))
+
+
+print(Fore.RED + '-'*100, end='\n\n')
+
