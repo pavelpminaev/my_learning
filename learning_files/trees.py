@@ -375,5 +375,49 @@ def change_owner(node, owner):
     new_tree = fs.mkdir(name, new_children, new_meta)
     return new_tree
 
+print(Fore.RED + '-'*100, '\n', Fore.RED + 'AGGREGATION 2')
+print(Fore.RED + '-'*100, end='\n\n')
 
+tree = fs.mkdir('/', [
+    fs.mkdir('etc', [
+        fs.mkdir('apache'),
+        fs.mkdir('nginx', [
+            fs.mkfile('nginx.conf'),
+        ]),
+    ]),
+    fs.mkdir('consul', [
+        fs.mkfile('config.json'),
+        fs.mkfile('file.tmp'),
+        fs.mkdir('data'),
+    ]),
+    fs.mkfile('hosts'),
+    fs.mkfile('resolve'),
+])
 
+#print(get_subdirectories_info(tree)) # => [('etc', 1), ('consul', 2)]
+
+def get_subdirectories_info(node):
+    name = fs.get_name(node)
+    new_meta = copy.deepcopy(node)
+
+    if fs.is_directory(node):
+        count_of_children = int(len(fs.get_children(node)))
+    return name, count_of_children
+
+print(get_subdirectories_info(tree))
+
+def get_files_count(node):
+    if fs.is_file(node):
+        return 1
+    children = fs.get_children(node)
+    descendant_counts = list(map(get_files_count, children))
+    return sum(descendant_counts)
+
+def get_subdirectories_info(node):
+    children = fs.get_children(node)
+    # Нас интересуют только директории
+    filtered = filter(fs.is_directory, children)
+    # Запускаем подсчет для каждой директории
+    result = map(
+        lambda child: (fs.get_name(child), get_files_count(child)), filtered,)
+    return list(result)
