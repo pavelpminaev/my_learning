@@ -412,7 +412,43 @@ def get_subdirectories_info(node):
 
 print(get_subdirectories_info(tree)) #print(get_subdirectories_info(tree)) # => [('etc', 1), ('consul', 2)]
 
-print(Fore.RED + '-'*100, '\n', Fore.RED + 'A')
+print(Fore.RED + '-'*100, '\n', Fore.RED + 'Accumulator')
 print(Fore.RED + '-'*100, end='\n\n')
+
+tree = fs.mkdir('/', [
+    fs.mkdir('etc', [
+        fs.mkdir('apache'),
+        fs.mkdir('nginx', [
+            fs.mkfile('nginx.conf'),
+        ]),
+        fs.mkdir('consul', [
+            fs.mkfile('config.json'),
+            fs.mkdir('data'),
+        ]),
+    ]),
+    fs.mkdir('logs'),
+    fs.mkfile('hosts'),
+])
+
+
+def find_empty_dir_paths(tree):
+    name = fs.get_name(tree)
+    # Получаем детей узла (директории)
+    children = fs.get_children(tree)
+    # Если детей нет, то возвращаем директорию
+    if len(children) == 0:
+        return name
+    # Фильтруем файлы, они нас не интересуют
+    dir_names = filter(fs.is_directory, children)
+    # Ищем пустые директории внутри текущей
+    empty_dir_names = list(map(find_empty_dir_paths, dir_names))
+    # flatten выправляет список так, что он становится плоским
+    return fs.flatten(empty_dir_names)
+
+
+print(find_empty_dir_paths(tree))
+# => ['apache', 'data', 'logs']
+
+
 
 
