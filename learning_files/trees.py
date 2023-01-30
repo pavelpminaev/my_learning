@@ -394,17 +394,6 @@ tree = fs.mkdir('/', [
     fs.mkfile('resolve'),
 ])
 
-#print(get_subdirectories_info(tree)) # => [('etc', 1), ('consul', 2)]
-
-def get_subdirectories_info(node):
-    name = fs.get_name(node)
-    new_meta = copy.deepcopy(node)
-
-    if fs.is_directory(node):
-        count_of_children = int(len(fs.get_children(node)))
-    return name, count_of_children
-
-print(get_subdirectories_info(tree))
 
 def get_files_count(node):
     if fs.is_file(node):
@@ -418,6 +407,12 @@ def get_subdirectories_info(node):
     # Нас интересуют только директории
     filtered = filter(fs.is_directory, children)
     # Запускаем подсчет для каждой директории
-    result = map(
-        lambda child: (fs.get_name(child), get_files_count(child)), filtered,)
+    result = map(lambda child: (fs.get_name(child), get_files_count(child)), filtered)
     return list(result)
+
+print(get_subdirectories_info(tree)) #print(get_subdirectories_info(tree)) # => [('etc', 1), ('consul', 2)]
+
+print(Fore.RED + '-'*100, '\n', Fore.RED + 'A')
+print(Fore.RED + '-'*100, end='\n\n')
+
+
