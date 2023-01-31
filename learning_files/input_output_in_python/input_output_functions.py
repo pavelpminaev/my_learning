@@ -1,7 +1,7 @@
 print('----------writing and writelines-----------')
 f = open('input_file.txt', 'w')
 print(f.write('Hello\nWorld\n'))   # 12
-print(f.writelines(['cat\n', 'dog\n']))   # None
+print(f.writelines(['cat\n', 'dog\n']), '\n')   # None
 f.close()
 
 print('----------read line-----------')
@@ -32,20 +32,20 @@ f.close()
 
 print('---printing list with readlines---')
 f = open('input_file.txt', 'r')
-print(f.readlines())
+print(f.readlines(), '\n')
 
-print('---numeration lines in file---')
+print('---numeration lines in file---', '\n')
 input_file = open('input_file.txt', 'r')
 output_file = open('output_file.txt', 'w')
 for i, lines in enumerate(input_file, 1):
-    output_file.write(f'{i}{". "}{lines}')
+    output_file.write(f'{i}. {lines}')
 input_file.close()
 output_file.close()
 
-
-
-"""with open('input.txt', 'r') as input_file:
-    with open('output.txt', 'w') as output_file:
+print('---numeration lines in file with context manager---')
+with open('input_file.txt', 'r') as input_file:
+    with open('output_file2.txt', 'w') as output_file:
         for i, line in enumerate(input_file, 1):
-            output_file.write(f'{i}, {line}')
-"""
+            output_file.write(f'{i}.    {line}')
+print('# with "with" files auto closing')
+
