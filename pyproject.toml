@@ -10,7 +10,6 @@ packages = [{include = "learning_files"}]
 python = "^3.10"
 mypy = "^0.991"
 hexlet-immutable-fs-trees = "^0.1.8"
-pymp = "^0.0.6"
 
 
 [tool.poetry.group.dev.dependencies]
