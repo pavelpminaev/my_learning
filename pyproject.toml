@@ -12,8 +12,6 @@ mypy = "^0.991"
 hexlet-immutable-fs-trees = "^0.1.8"
 pymp = "^0.0.6"
 
-[tool.poetry.scripts]
-say-hello = "learning_files.scripts.say_hello:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
