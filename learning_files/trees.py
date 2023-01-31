@@ -446,9 +446,55 @@ def find_empty_dir_paths(tree):
     return fs.flatten(empty_dir_names)
 
 
-print(find_empty_dir_paths(tree))
+print('empty dir without accumulator =>', find_empty_dir_paths(tree))
 # => ['apache', 'data', 'logs']
 
+"""make ['apache', 'data', 'logs'] from
+ [['apache', [], ['data']], 'logs']"""
+
+def flatten(tree):
+    result = []
+    def walk(subtree):
+        for item in subtree:
+            if isinstance(item, list):
+                walk(item)
+            else:
+                result.append(item)
+    walk(tree)
+    return result
+
+import math
+
+def find_empty_dir_paths_with_depth(tree, max_depth=math.inf):
+    # Внутренняя функция, которая может передавать аккумулятор
+    # Аккумулятором выступает depth — переменная, содержащая текущую глубину
+    def walk(node, depth):
+        name = fs.get_name(node)
+        children = fs.get_children(node)
+        # Если детей нет, то возвращаем директорию
+        if len(children) == 0:
+            return name
+        # Если это второй уровень вложенности, и директория не пустая,
+        # то не имеет смысла смотреть дальше
+        if depth == max_depth:
+            # Почему возвращается именно пустой список?
+            # Потому что снаружи выполняется flatten
+            # Он раскрывает пустые списки
+            return []
+        # Оставляем только директории
+        dir_paths = filter(fs.is_directory, children)
+        # Не забываем увеличивать глубину
+        output = list(map(
+            lambda child: walk(child, depth + 1),
+            dir_paths,
+          ))
+        # Перед возвратом "выпрямляем" список
+        return fs.flatten(output)
+
+    # Начинаем с глубины 0
+    return walk(tree, 0)
 
 
+print("empty dir's with max_depth=math.inf =>", '\n', '\t'*6,
+      find_empty_dir_paths_with_depth(tree))
 
