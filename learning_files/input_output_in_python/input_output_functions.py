@@ -38,7 +38,7 @@ print('---numeration lines in file---')
 input_file = open('input_file.txt', 'r')
 output_file = open('output_file.txt', 'w')
 for i, lines in enumerate(input_file, 1):
-    output_file.write(f'{i}{lines}')
+    output_file.write(f'{i}{". "}{lines}')
 input_file.close()
 output_file.close()
 
