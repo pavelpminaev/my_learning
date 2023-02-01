@@ -39,13 +39,18 @@ input_file = open('input_file.txt', 'r')
 output_file = open('output_file.txt', 'w')
 for i, lines in enumerate(input_file, 1):
     output_file.write(f'{i}. {lines}')
+
+output_file = open('output_file.txt', 'r')
+print(output_file.read())
 input_file.close()
 output_file.close()
+
 
 print('---numeration lines in file with context manager---')
 with open('input_file.txt', 'r') as input_file:
     with open('output_file2.txt', 'w') as output_file:
         for i, line in enumerate(input_file, 1):
-            output_file.write(f'{i}.    {line}')
+            output_file.write(f'{i}. {line}')
 print('# with "with" files auto closing')
-
+output_file2 = open('output_file.txt', 'r')
+print(output_file2.read())
