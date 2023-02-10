@@ -498,3 +498,37 @@ def find_empty_dir_paths_with_depth(tree, max_depth=math.inf):
 print("empty dir's with max_depth=math.inf =>", '\n', '\t'*6,
       find_empty_dir_paths_with_depth(tree))
 
+
+print(Fore.RED + '-'*100, '\n', Fore.RED + 'Accumulator')
+print(Fore.RED + '-'*100, end='\n\n')
+
+
+data = {"hello": "world", "is": True, "nested": {"count": 5}}
+data = 'hello'
+data = True
+data = 5
+data = { "hello": "world", "is": True, "nested": { "count": 5 } }
+
+def stringify(data):
+    return str(data)
+
+print('need:', '{ hello: world is: True nested: { count: 5} }')
+print(stringify(data))  # значение приведено к строке, но не имеет кавычек
+
+
+
+"""# hello
+stringify(True)
+# True
+stringify(5)
+# 5
+
+data = { "hello": "world", "is": True, "nested": { "count": 5 } }
+stringify(data)  # то же самое что stringify(data, ' ', 1)
+# {
+#   hello: world
+#   is: True
+#   nested: {
+#    count: 5
+#   }
+# }"""
