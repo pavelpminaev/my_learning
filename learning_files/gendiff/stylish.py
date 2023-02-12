@@ -172,4 +172,12 @@ def make_format(diff_dict):
 
 
 
-print(make_format(gd))
+"""print(make_format(gd))"""
+
+di = {'key1': 'val1', 'key2': 'val2'}
+
+def test(di):
+    return json.dumps(di)
+
+print(test(di))
+print(di)
