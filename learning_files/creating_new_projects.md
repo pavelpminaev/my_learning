@@ -1,3 +1,41 @@
+Установите pyenv
+
+```bash
+brew install pyenv
+pyenv install 3.11.2
+pyenv global 3.11.2
+# проверим, сработало ли
+pyenv version
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+```
+Доверить управление Homebrew
+```bash
+$ brew list | grep python
+python
+# Если в качестве результата вы получите python, значит, он установлен.
+# Но какая это версия? Давайте проверим:
+$ brew info python
+# -> python: stable 3.7.3 (bottled), HEAD
+brew update && brew upgrade python
+
+echo "alias python=/usr/local/bin/python3" >> ~/.zshrc
+# Чтобы убедиться, что приведенный выше путь указывает на то место, куда Homebrew
+# установил Python в нашей среде, мы можем запустить
+brew info python
+# и поискать информацию о пути.
+# Этот метод использования Homebrew для управления нашей средой Python является хорошей отправной
+# точкой.Чтобы убедиться, что приведенный выше путь указывает на то место, куда Homebrew установил
+# Python в нашей среде, мы можем запустить brew info python и поискать информацию о пути.
+# Этот метод использования Homebrew для управления нашей средой Python является хорошей отправной точкой.
+
+# Не забудьте обновить pip до версии pip3!
+brew info python
+pip -V
+which pip3
+echo "alias pip=/opt/homebrew/bin/pip3" >> ~/.zshrc 
+```
+
+
 Create new poetry directory
 ```bash
 poetry new project_name
@@ -27,6 +65,10 @@ poetry add --group dev mypy # static type checker for Python.
 
  - pre-commit
 
+### very important command for check commands in project:
+```bash
+ls -la $HOME/.local/bin
+```
 
 add setup.cfg - file configuration
 ``````
@@ -80,7 +122,7 @@ gh repo create
 
 - Create Makefile
 
-Добавьте в Makefile команду build, которая выполнит 
+Добавьте в Makefile команду build(create installer file), которая выполнит 
 ```bash
 poetry build
 ```
@@ -101,12 +143,12 @@ clean:
 
 Добавьте в .toml
 >[tool.poetry.scripts]\
-brain-games = "package_name.scripts.module:main"'
+brain-games = "package_name.scripts.module_name:main"'
 
 example for markdown file:
-``` python3
-# It`s python code
 
+```python3
+# It`s python code
 def function():
     return result
 ```
