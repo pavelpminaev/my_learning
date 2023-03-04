@@ -532,3 +532,80 @@ stringify(data)  # то же самое что stringify(data, ' ', 1)
 #    count: 5
 #   }
 # }"""
+
+
+
+# Обход дерева
+
+print(Fore.RED + '-'*100, '\n', Fore.RED + 'Обход дерева')
+print(Fore.RED + '-'*100, end='\n\n')
+
+"""
+     1
+    / \ 
+   2   3
+  / \ 
+ 4   5
+"""
+
+# При прямом обходе мы посещаем родительские узлы до посещения узлов-потомков.
+# В случае с нашим деревом мы будем обходить узлы в таком порядке: 1, 2, 4, 5, 3.
+
+# Обратный обход двоичного дерева — это когда вы сначала посещаете узлы-потомки,
+# а затем — их родительские узлы. В нашем случае порядок посещения узлов при обратном
+# обходе будет таким: 4, 5, 2, 3, 1.
+
+# При центрированном обходе мы посещаем все узлы слева направо. Центрированный обход
+# нашего дерева — это посещение узлов 4, 2, 5, 1, 3.
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+tree = TreeNode(1)
+tree.left = TreeNode(2)
+tree.right = TreeNode(3)
+tree.left.left = TreeNode(4)
+tree.left.right = TreeNode(5)
+
+"""space = ' '
+print(Fore.RED + '-'*100, '\n', Fore.RED + space*5 + '*', '\n',
+      space*3 + '* 1 *', '\n',
+      space*5 + '*',  '\n',
+      space*3 + '/   \\',  '\n',
+      space*2 + '*',  '\n',
+      '* 2 *')"""
+
+# Выводит родителя до всех его потомков
+print('\n', Fore.GREEN + 'pre_order', '\n', 'Выводит родителя до всех его потомков')
+def pre_order(node):
+    if node:
+        print(node.value)
+        pre_order(node.left)
+        pre_order(node.right)
+
+pre_order(tree)
+
+# Выводит потомков, а затем родителя
+def post_order(node):
+    if node:
+        post_order(node.left)
+        post_order(node.right)
+        print(node.value)
+
+print('\n', Fore.GREEN + 'post_order', '\n', 'Выводит потомков, а затем родителя')
+post_order(tree)
+
+# выводит левого потомка, затем родителя, затем правого потомка
+def in_order(node):
+    if node:
+        in_order(node.left)
+        print(node.value)
+        in_order(node.right)
+
+print('\n', Fore.GREEN + 'in_order', '\n', 'выводит левого потомка, затем родителя, затем правого потомка')
+in_order(tree)
+
