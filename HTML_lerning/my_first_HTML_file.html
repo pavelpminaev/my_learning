@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .background {
+        background-color: black;
+        color: white;
+        }
+    </style>
+    <title>myLearningFile</title>
 </head>
 <body>
-<h1>Hello FUKING bitch</h1>
+<h1>Hello HTML</h1>
 <hr>
 <p2>It's first paragraph</p2>
-
+<!-- Paragraphs -->
 <div>
     <p title="This is title of paragraph?">It's again <br> This is another sentence.(with br teg)</p>
     <p>What is Lorem Ipsum?<br>
@@ -18,19 +26,16 @@
         and
         typesetting <small>industry</small>.
     </p>
-    <p>What is Lorem Ipsum?<br>
-        <span>Lorem Ipsum</span> is
+    <p class="background">What is Lorem Ipsum?<br>
+        <span style="color:red">Lorem Ipsum</span> is
         <ins>simply</ins>
         dummy <sup>text</sup> <sub>of</sub> the printing and
         typesetting industry.
     </p>
 </div>
-<p>What is Lorem Ipsum?<br>
-    Lorem Ipsum is simply dummy text of the printing and
-    typesetting industry.</p>
 
-<p>
-    <a href="https://www.google.com/search?q=
+<!-- Image and Bookmark -->
+<a href="https://www.google.com/search?q=
   %D1%86%D0%B5%D0%BD%D0%B0+
   %D1%8F%D0%B8%D1%86+%D0%B2+
   %D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8&sca_esv=
@@ -48,14 +53,12 @@
   MYgwEYCsICDxAAGAEYgAQYsQMYgwEYCsICCxAuGIAEGMcBGK8BwgIEEA
   AYA8ICDhAuGIAEGLEDGMcBGK8BwgILEC4YgwEYsQMYgAQ&sclient
   =gws-wiz" target="_blank">
-        <img src="banner.jpg" alt="alternate description here" width="40">
-
-
-</p>
+        <img src="banner.jpg" alt="alternate description here" width="400">
 <br>
+<!-- link "to end" -->
 <a href="#bookmark"> to end </a>
 <hr>
-
+<!-- Lists examples -->
 <ul>
     <li>list 1</li>
     <li>list 2</li>
@@ -71,15 +74,87 @@
     <li>list 2</li>
     <li>list 3</li>
 </ol>
-
-
+<br>
+<!-- Tables example -->
 <table>
-    <thead>ˆˆ
-    <tr>
-        <th>First name</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+        </tr>
     </thead>
+    <tbody>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>Paul</td>
+            <td>Octopus</td>
+            <td>88</td>
+        </tr>
+    </tbody>
 </table>
+<br>
+<br>
+<table>
+    <tr>
+        <th>Name:</th>
+        <td>Paul Peterson</td>
+    </tr>
+    <tr>
+        <th rowspan="2">Telephone:</th>
+        <td>555-432-234</td>
+    </tr>
+    <tr>
+        <td>435-567-876</td>
+    </tr>
+</table>
+<br>
+    <hr>
+<br>
+<!-- Form example -->
+<form action="server.php">
+      <fieldset>
+          <legend> Personal information:</legend>
+          First name:<br>
+          <input type="text" name="firstname" value="" placeholder="First Name Here"><br><br>
+          Last Name:<br>
+          <input type="text" name="lastname" value="">
+          <br>
+          <br>
+          <!--Radio example-->
+          <input type="radio" name="options"> Option 1
+          <input type="radio" name="options"> Option 2
+          <br>
+          <!-- Checkbox example -->
+          <br>
+          <input type="checkbox" name="checkbox" checked> Checkbox 1
+          <input type="checkbox" name="checkbox"> Checkbox 2
+          <input type="checkbox" name="checkbox" checked> Checkbox 3<br>
+          <br>
+          <!--Select example-->
+          <label for="carSelect">Select:</label>
+          <select name="cars" id="carSelect">
+              <option value="BMW">BMW</option>
+              <option value="Volvo">Volvo</option>
+              <option value="Changan" selected>Changan</option>
+          </select>
+          <br><br>
+          <input type="submit" value="Submit">
+      </fieldset>
+</form>
+<br>
+<!-- just button example-->
+<button>Click Me</button>
+<br>
+
+
+
+
+
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
